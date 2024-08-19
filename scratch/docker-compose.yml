@@ -1,0 +1,14 @@
+services:
+  postgres-go:
+    image: postgres:15-bullseye
+    environment:
+      POSTGRES_DB: database
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+    # デバッグ用のログを出力するための設定
+    # 必要な時にコメントアウトを外してください
+    # command: postgres -c log_destination=stderr -c log_statement=all -c log_connections=on -c log_disconnections=on
+    ports:
+      - 15432:5432
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/1_init.sql
